@@ -1,0 +1,24 @@
+services:
+  api:
+    build: .
+    container_name: proyectographqlapi
+    ports:
+      - "5201:8080"
+    depends_on:
+      - mongo
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo
+    container_name: mongodb-graphql
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
